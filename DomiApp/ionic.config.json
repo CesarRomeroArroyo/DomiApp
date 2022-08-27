@@ -1,0 +1,7 @@
+{
+  "name": "DomiApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
