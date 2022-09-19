@@ -1,0 +1,54 @@
+export class ProductosModel {
+    id: number;
+    codigo: string;
+    nombre: string;
+    descripcion: string;
+    categoria: string;
+    foto: string;
+    state: number;
+    pres_pro: string;
+    mar_pro: string;
+    cost_serv: number;
+    apli_ciu: number;
+    pais: number;
+    depto: number;
+    ciu: number;
+    apli_veh: number;
+    tip_veh: number;
+    apli_tip_mer: number;
+    tip_mer: number;
+    tipo:  number;
+    cod_cum: string;
+    lote: string;
+    vence: string;
+    cod_medicamento: string;
+    mezcla: number;
+    cliente: string;
+    constructor() {
+        this.id = 0;
+        this.codigo = '';
+        this.nombre = '';
+        this.descripcion = '';
+        this.categoria = '';
+        this.foto = '';
+        this.state = 0;
+        this.pres_pro = '';
+        this.mar_pro = '';
+        this.cost_serv = 0;
+        this.apli_ciu = 0;
+        this.pais = 0;
+        this.depto = 0;
+        this.ciu = 0;
+        this.apli_veh = 0;
+        this.tip_veh = 0;
+        this.apli_tip_mer = 0;
+        this.tip_mer = 0;
+        this.tipo = -1;
+        this.cod_cum = '';
+        this.lote = '';
+        this.vence = '';
+        this.cod_medicamento = '';
+        this.mezcla = 0;
+        this.cliente = '';
+    }
+}

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_url: 'https://domiapp.amazing-wright.137-184-198-32.plesk.page/public/',
+  sockets_url: 'wss://king-prawn-app-5qx6e.ondigitalocean.app/'
 };
 
 /*
