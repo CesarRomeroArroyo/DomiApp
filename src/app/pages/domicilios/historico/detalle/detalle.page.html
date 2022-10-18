@@ -1,0 +1,244 @@
+
+
+<ion-content>
+    <div class="contentPage">
+      <div class="contentPage__title">
+        <div class="contentPage__title__back" onclick="window.history.go(-1);">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          <div class="contentPage__title__back__text">Atras</div>
+        </div>
+        <div class="contentPage__title__text"></div>
+      </div>
+      <div class="contentPage__content">
+        <div class="contentPage__content__form">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="12" size-lg="6">
+                <div class="cardDetail">
+                  <div class="cardDetail__header">
+                    <div class="cardDetail__header__img">
+                      <div class="cardDetail__header__img__container">
+                        <ion-icon name="cart-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="cardDetail__header__text">
+                      <div class="cardDetail__header__text__title">Emprendedor: {{historial_domi?.emprende_nombre}}</div>
+                      <div class="cardDetail__header__text__subtitle">{{historial_domi?.cliente_nombre}}</div>
+                      <div class="cardDetail__header__text__value">
+                        <div class="cardDetail__header__text__value__num">${{historial_domi?.valor_total | number: '1.0-0'}}</div>
+                        <div class="cardDetail__header__text__value__option">
+                          <!-- <ion-icon name="close-circle-outline"></ion-icon> Cancelar -->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="cardDetail__divider">
+                    <div class="cardDetail__divider__line"></div>
+                  </div>
+                  <div class="cardDetail__body">
+                    <div class="cardDetail__body__timeline">
+                      <div class="cardDetail__body__timeline__option">
+                        <div class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 1 ? 'openTimelineBorder' : ''" class="cardDetail__body__timeline__option__line"></div>
+                          <div class="cardDetail__body__timeline__option__img__container">
+                            <ion-icon name="save-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div class="cardDetail__body__timeline__option__data__title">Creado - Programada</div>
+                          <div class="cardDetail__body__timeline__option__data__description">Creado - Programado</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('1', tiempos_domim) }}
+                          
+                        </div>
+                        
+                      </div>
+
+                      <div class="cardDetail__body__timeline__option">
+                        <div  class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 2 ? 'openTimelineBorder' : ''" class="cardDetail__body__timeline__option__line"></div>
+                          <div [ngClass]="estado <= 1 ? 'openTimelineBack' : ''" class="cardDetail__body__timeline__option__img__container">
+                            <ion-icon name="checkbox-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div [ngClass]="estado <= 1 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__title">Asignado</div>
+                          <div [ngClass]="estado <= 1 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__description">Con el Domiciliario</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('2', tiempos_domim) }}
+                        </div>
+                      </div>
+
+                      <div class="cardDetail__body__timeline__option">
+                        <div class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 3 ? 'openTimelineBorder' : ''" class="cardDetail__body__timeline__option__line"></div>
+                          <div [ngClass]="estado <= 2 ? 'openTimelineBack' : ''" class="cardDetail__body__timeline__option__img__container">
+                            <ion-icon name="bicycle-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div [ngClass]="estado <= 2 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__title">Recogido por el Domiciliario</div>
+                          <div [ngClass]="estado <= 2 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__description">En camino</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('3', tiempos_domim) }}
+                        </div>
+                      </div>
+
+                      <div *ngIf="flagestadocancelado" class="cardDetail__body__timeline__option">
+                        <div class="cardDetail__body__timeline__option__img">
+                          <div *ngIf="!flagestadocancelado" class="cardDetail__body__timeline__option__line openTimelineBorder"></div>
+                          <div class="cardDetail__body__timeline__option__img__container">
+                            <ion-icon name="close-circle-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div class="cardDetail__body__timeline__option__data__title">Cancelado</div>
+                          <div class="cardDetail__body__timeline__option__data__description">Domicilio cancelado</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('4', tiempos_domim) }}
+                          {{buscarHoraFecha('5', tiempos_domim) }}
+                          {{buscarHoraFecha('6', tiempos_domim) }}
+                        </div>
+                      </div>
+
+                      <div *ngIf="!flagestadocancelado" class="cardDetail__body__timeline__option">
+                        <div class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 7 ? 'openTimelineBorder' : ''" class="cardDetail__body__timeline__option__line"></div>                          
+                          <div [ngClass]="estado <= 6 ? 'openTimelineBack' : ''" class="cardDetail__body__timeline__option__img__container ">
+                            <ion-icon name="checkmark-done-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div  [ngClass]="estado <= 6 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__title ">Entregado</div>
+                          <div [ngClass]="estado <= 6 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__description ">El Domicilio fue Entregado</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('7', tiempos_domim) }}
+                        </div>
+                      </div>
+
+                      <div *ngIf="!flagestadocancelado" class="cardDetail__body__timeline__option">
+                        <div class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 8 ? 'openTimelineBorder' : ''" class="cardDetail__body__timeline__option__line"></div>
+                          <div [ngClass]="estado <= 7 ? 'openTimelineBack' : ''" class="cardDetail__body__timeline__option__img__container">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div [ngClass]="estado <= 7 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__title ">Facturado</div>
+                          <div [ngClass]="estado <= 7 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__description ">El Domicilio fue Facturado</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('8', tiempos_domim) }}
+                        </div>
+                      </div>
+
+                      <div *ngIf="!flagestadocancelado" class="cardDetail__body__timeline__option">
+                        <div  class="cardDetail__body__timeline__option__img">
+                          <div [ngClass]="estado <= 8 ? 'openTimelineBack' : ''" class="cardDetail__body__timeline__option__img__container ">
+                            <ion-icon name="cash-outline"></ion-icon>
+                          </div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__data">
+                          <div [ngClass]="estado <= 8 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__title ">Pagado</div>
+                          <div [ngClass]="estado <= 8 ? 'openTimelinetext' : ''" class="cardDetail__body__timeline__option__data__description ">El Domicilio fue Pagado</div>
+                        </div>
+                        <div class="cardDetail__body__timeline__option__fecha">
+                          {{buscarHoraFecha('9', tiempos_domim) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col size="12" size-md="12" size-lg="6">
+                <div class="cardDetail">
+                  <div class="cardDetail__header">
+                    <div class="cardDetail__header__img">
+                      <div class="cardDetail__header__img__container2">
+                        <ion-icon name="bicycle-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="cardDetail__header__text">
+                      <div class="cardDetail__header__text__title">
+                        {{historial_domi?.domiciliario_nombre}}
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cardDetail">
+                  <div class="cardDetail__header">
+                    <div class="cardDetail__header__img">
+                      <div class="cardDetail__header__img__container2">
+                        <ion-icon name="navigate-circle-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="cardDetail__header__text">
+                      <div class="cardDetail__header__text__title">
+                        {{historial_domi?.cliente_nombre}}
+                      </div>
+                      <div class="cardDetail__header__text__subtitle">
+                        {{historial_domi?.cliente_direccion}}
+                      </div>
+                      <div class="cardDetail__header__text__subtitle">
+                        <div class="cardDetail__body__phone"><ion-icon name="call-outline"></ion-icon>{{historial_domi?.cliente_telefono}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cardDetail">
+                  <div class="cardDetail__header">
+                    <div class="cardDetail__header__img">
+                      <div class="cardDetail__header__img__container2">
+                        <ion-icon name="business-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="cardDetail__header__text">
+                      <div class="cardDetail__header__text__title">
+                        {{historial_domi?.emprende_nombre}}
+                      </div>
+                      <div class="cardDetail__header__text__subtitle">
+                        {{historial_domi?.emprende_direccion}}
+                      </div>
+                      <div class="cardDetail__header__text__subtitle">
+                        <div class="cardDetail__body__phone"><ion-icon name="call-outline"></ion-icon>{{historial_domi?.emprende_telfono}}</div>
+                      </div>
+                    </div>
+                  </div>                  
+                </div>
+
+                <div class="cardDetail" *ngIf="estado == 9">
+                  <div class="cardDetail__img">
+                    <img src="{{domicilio?.imagen}}" alt="">
+                  </div>  
+                  <ion-button color="success" expand="block" size="large" (click)="validarActualizacion('10')">
+                    <ion-icon name="checkmark-done-outline"></ion-icon> Aprobar EL Pago
+                  </ion-button>
+                  <ion-button color="danger" expand="block" size="large" (click)="validarActualizacion('8')">
+                    <ion-icon name="close-outline"></ion-icon> No APROBAR EL PAGO
+                  </ion-button>      
+                </div>
+
+                <div class="cardDetail" *ngIf="estado == 10">
+                  <h1>EL domicilio fue procesado completamente</h1>
+                </div>
+                <!-- <div class="cardDetail">
+                  MAPA
+                </div> -->
+
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </div>
+</ion-content>

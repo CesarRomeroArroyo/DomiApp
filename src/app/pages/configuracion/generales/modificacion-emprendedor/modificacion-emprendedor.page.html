@@ -1,0 +1,53 @@
+<ion-content>
+    <div class="contentPage contentPageDos">
+        <div class="contentPage__content">
+            <div class="contentPage__content__form">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12" class="remove_border">
+                            <ion-item-divider color="success">
+                                <ion-label>
+                                    LISTADO EMPRENDEDORES
+                                </ion-label>
+                            </ion-item-divider>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size-lg="12" class="ion-padding-top remove_border">
+                            <div class="contentPage__content__table">
+                                <ion-row class="center subtitle">
+                                    <ion-col>No</ion-col>
+                                    <ion-col>Name</ion-col>
+                                    <ion-col>Tipo Id</ion-col>
+                                    <ion-col *ngIf="general.pago_del_emprendedor == 2">Valor Domicilio</ion-col>
+                                    <ion-col *ngIf="general.pago_domiciliario == 4">Pago Domiciliario</ion-col>
+                                    <ion-col>Opciones</ion-col>
+                                </ion-row>
+                                <ion-row class="center" *ngFor="let item of listado; index as i">
+                                    <ion-col class="flex">{{ i + 1 }}</ion-col>
+                                    <ion-col class="flex">{{item.nombre}}</ion-col>
+                                    <ion-col class="flex">{{item.tip_ide }}</ion-col>
+                                    <ion-col *ngIf="general.pago_del_emprendedor == 2">
+                                        <ion-item>
+                                            <ion-label position="floating">Valor Domicilio</ion-label>
+                                            <ion-input [(ngModel)]="item.valor_domicilio"></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col *ngIf="general.pago_domiciliario == 4">
+                                        <ion-item>
+                                            <ion-label position="floating">Pago Domiciliario</ion-label>
+                                            <ion-input [(ngModel)]="item.pago_domiciliario"></ion-input>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col class="flex">
+                                        <ion-button color="success" (click)="guardar(item)">Guardar</ion-button>
+                                    </ion-col>
+                                </ion-row>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+    </div>
+</ion-content>

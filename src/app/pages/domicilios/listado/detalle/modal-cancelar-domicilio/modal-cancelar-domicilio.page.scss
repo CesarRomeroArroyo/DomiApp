@@ -1,0 +1,152 @@
+.contentPage{
+    &__content{
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        &__form{
+            background-color: white;
+            width: 100%;
+            border-radius:5px;
+            padding: 15px;
+        }
+    }
+}
+
+.cardDetail{
+    background-color:#f1f2f8;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    &__header{
+        display: flex;
+        flex-direction: row;
+        &__img{
+            width: 20%;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+            &__container{
+                background-color:var(--ion-color-success);
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                color: var(--ion-color-light);
+                display: flex;
+                justify-content:center;
+                align-items:center;
+                font-size:30px;
+            }
+            &__container2{
+                background-color:var(--ion-color-success);
+                border-radius: 15px;
+                width: 50px;
+                height: 50px;
+                color: var(--ion-color-light);
+                display: flex;
+                justify-content:center;
+                align-items:center;
+                font-size:30px;
+            }
+        }
+        &__text{
+            width: 80%;
+            &__title{
+                font-size:16px;
+                font-weight: bold;
+            }
+            &__subtitle{
+                font-size:14px;
+                font-weight: bold;
+                color: #a7a7a7;
+            }
+            &__value{
+                margin-top:15px;
+                display: flex;
+                &__num{
+                    width: 50%;
+                    font-weight: bold;
+                }
+                &__option{
+                    width: 50%;
+                    color: var(--ion-color-danger);
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding-right: 10px;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    &__divider{
+        margin-top: 25px;
+        padding: 0px 25px;
+        &__line {
+            border-top: 1px solid #dbd5d5;
+        }
+    }
+    &__body{
+        padding:15px;
+        display: flex;
+        flex-direction: column;
+        &__timeline{
+            display: flex;
+            flex-direction: column;
+            &__option{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 30px;
+                &__img{
+                    width:20%;
+                    display: flex;
+                    justify-content:center;
+                    align-items:center;
+                    position: relative;
+                    &__container{
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        background-color:var(--ion-color-tertiary);
+                        border-radius: 50%;
+                        width: 45px;
+                        height: 45px;
+                        color: var(--ion-color-light);
+                        font-size:22px;
+                        z-index: 999;
+                    }
+                }
+                &__data{
+                    width:60%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content:center;
+                    &__title{
+                        color:var(--ion-color-tertiary);
+                        font-weight: bold;
+                        font-size: 14px;
+                        margin-bottom:2px;
+                    }
+                    &__description{
+                        font-weight: bold;
+                        font-size: 12px;
+                    }
+                }
+                &__fecha{
+                    width:20%;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                }
+                &__line{
+                    border-right: 5px solid #5260ff;
+                    height:70px;
+                    position:absolute;
+                    top:25px;
+                    
+                }
+            }
+        }
+    }
+}

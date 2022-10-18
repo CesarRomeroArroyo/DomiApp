@@ -1,0 +1,193 @@
+<ion-content>
+  <div class="contentPage">
+    <div class="contentPage__title">
+      <div class="contentPage__title__back" onclick="window.history.go(-1);">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        <div class="contentPage__title__back__text">Atras</div>
+      </div>
+      <div class="contentPage__title__text"></div>
+    </div>
+    <div class="contentPage__content">
+      <div class="contentPage__content__form">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item-divider color="success">
+                <ion-label>
+                  DATOS BASICOS
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Nombre: </ion-label>
+                <ion-input [(ngModel)]="producto.nombre"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Codigo</ion-label>
+                <ion-input [(ngModel)]="producto.codigo"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Categoria</ion-label>
+                <ion-select [selectedText]="producto.categoria" slot="end" placeholder="Selecciona un Tipo" (ngModelChange)="changeIdCategories($event)" [(ngModel)]="producto.categoria_id">
+                  <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Tipo</ion-label>
+                <ion-select placeholder="Selecciona un Tipo" [(ngModel)]="producto.tipo">
+                  <ion-select-option value="0">Producto</ion-select-option>
+                  <ion-select-option value="1">Servicio</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Estado</ion-label>
+                <ion-select placeholder="Selecciona un Tipo" [(ngModel)]="producto.state">
+                  <ion-select-option value="0">Nuevo</ion-select-option>
+                  <ion-select-option value="1">Usado</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="stacked">Foto</ion-label>
+                <input class="hidden" #inputFile type="file" (change)="changeListener($event)" accept="image/*">
+                <ion-button color="light" (click)="inputFile.click()">Cargar archivo</ion-button>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="12" size-lg="12">
+              <ion-item>
+                <ion-label position="floating">Descripcion</ion-label>
+                <ion-textarea rows="3" [(ngModel)]="producto.descripcion"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item-divider color="success">
+                <ion-label>
+                  OTROS DATOS
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ng-container
+            [ngTemplateOutlet]="this.producto.tipo == -1 ? undefined : this.isProduct(this.producto.tipo) ? MostrarCamposProducto : MostrarCamposServicio ">
+          </ng-container>
+          <ng-template #MostrarCamposProducto>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="floating">Descripcion del producto</ion-label>
+                <ion-input [(ngModel)]="producto.pres_pro"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="floating">Marca</ion-label>
+                <ion-input [(ngModel)]="producto.mar_pro"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ng-template>
+          <ng-template #MostrarCamposServicio>
+            <ion-row>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Costo servicio</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.cost_serv"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Aplicacion ciudad</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.apli_ciu"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Pais</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.pais"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Departamento</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.depto"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Ciudad</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.ciu"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Aplicacion Vehiculo</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.apli_veh"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Tipo Vehiculo</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.tip_veh"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Aplicacion Tipo Mercado</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.apli_tip_mer"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Codigo cum</ion-label>
+                  <ion-input [(ngModel)]="producto.cod_cum"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Lote</ion-label>
+                  <ion-input [(ngModel)]="producto.lote"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="stacked">Vence</ion-label>
+                  <ion-input type="date" [(ngModel)]="producto.vence"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Codigo medicamento</ion-label>
+                  <ion-input [(ngModel)]="producto.cod_medicamento"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="6" size-lg="4">
+                <ion-item>
+                  <ion-label position="floating">Mezcla</ion-label>
+                  <ion-input type="number" [(ngModel)]="producto.mezcla"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ng-template>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="confirmarGuardado()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

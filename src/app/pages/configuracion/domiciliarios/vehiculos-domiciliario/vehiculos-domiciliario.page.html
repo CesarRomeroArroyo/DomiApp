@@ -1,0 +1,96 @@
+<ion-content>
+  <div class="contentPage contentPageDos">
+    <div class="contentPage__content">
+      <div class="contentPage__content__form">
+        <ion-grid>
+          <ion-row class="ion-margin-top">
+            <ion-col size="12">
+              <ion-item-divider color="success">
+                <ion-label>
+                  VEHICULO DOMICILIARIO
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="floating">Placa</ion-label>
+                <ion-input [(ngModel)]="vehiculoDomiciliario.placa"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="floating">Modelo</ion-label>
+                <ion-input [(ngModel)]="vehiculoDomiciliario.modelo"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="floating">Linea</ion-label>
+                <ion-input [(ngModel)]="vehiculoDomiciliario.linea"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Marca</ion-label>
+                <ion-input [(ngModel)]="vehiculoDomiciliario.marca"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Tarjeta De Propiedad</ion-label>
+                <ion-input [(ngModel)]="vehiculoDomiciliario.tarjeta_propiedad"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Estado</ion-label>
+                <ion-select placeholder="Selecciona un Tipo" [(ngModel)]="vehiculoDomiciliario.estado">
+                  <ion-select-option value='1'>Activo</ion-select-option>
+                  <ion-select-option value='2'>Inactivo</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Principal</ion-label>
+                <ion-select placeholder="Selecciona un Tipo" [(ngModel)]="vehiculoDomiciliario.principal">
+                  <ion-select-option value='1'>Si</ion-select-option>
+                  <ion-select-option value='2'>No</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="12" size-lg="12">
+              <ion-item>
+                <ion-label position="floating">Obseravciones</ion-label>
+                <ion-textarea rows="3" [(ngModel)]="vehiculoDomiciliario.observaciones"></ion-textarea>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ng-container *ngIf="isEdit(); then editar; else guardar"></ng-container>
+              <ng-template #editar>
+                <ion-button color="success" (click)="editarVehiculosDomiciliario()">Editar</ion-button>
+                <ion-button color="danger" (click)="cancelar()">Cancelar</ion-button>
+              </ng-template>
+              <ng-template #guardar>
+                <ion-button color="success" (click)="confirmarGuardado()">Guardar</ion-button>
+              </ng-template>
+            </ion-col>
+            <ion-col size-lg="12" class="ion-margin ion-padding padding">
+              <div class="contentPage__content__table">
+                <app-data-table 
+                 [columns]="columns" 
+                 [data]="data | mapperVehiculos" 
+                 [options]="true" 
+                 (deleteEvent)="delete($event)"
+                 (editEvent)="gotoEdit($event)">
+                </app-data-table>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

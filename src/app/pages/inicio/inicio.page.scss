@@ -1,0 +1,167 @@
+.inicio{
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction:column;
+    &__bienvenido{
+        font-size: 25px;
+        color: var(--ion-color-light);
+    }
+    &__body{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+        &__domicilio{
+            width: 100%;
+            padding: 15px;
+            border-radius:10px;
+            background-color: var(--ion-color-light);
+            display: flex;
+            justify-content: center;
+        }
+        &__financiero{
+            width: 100%;
+            border-radius:10px;
+            
+            display: flex;
+            justify-content: center;
+            flex-direction: column;            
+            &__domi{
+                background-color: var(--ion-color-light);
+                padding: 5px;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 2px dashed #9d9fa6;
+                &__nombres{
+                    &__emprende{
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+                    &__cliente{
+                        font-size: 10px;
+                        text-transform: uppercase;
+                    }
+                }
+                &__valores{
+                    &__domi{
+                        font-size: 10px;
+                        color: #9d9fa6;
+                    }
+                    &__emprende{
+                        font-size: 10px;
+                        color: #9d9fa6;
+                    }
+                    &__total{
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+            }
+            &__total{
+                padding: 15px;
+                display: flex;
+                justify-content:space-between;
+                font-weight: bold;
+                &__valor{
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+.center{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    label{
+        margin-top:15px;
+        margin-bottom: 10px;
+    }
+}
+
+.invoice{
+    margin-top: 5px;
+    border: 2px solid #9d9fa6;
+    border-style: dashed;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    &__data{
+        height:40px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 22px;
+        text-transform: uppercase;
+        label{
+            font-weight: bold;
+        }        
+    }
+    &__note{
+        font-size: 10px;
+        margin-top: 10px;
+    }
+}
+
+ion-item-divider ion-label{
+    font-weight: bold; 
+    
+}
+
+.card{
+    background-color: var(--ion-color-light);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+
+.modal{
+    position: fixed;
+    top: 0;
+    background: rgba($color: #000000, $alpha: 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__content{
+        width: 450px;
+        background-color: var(--ion-color-light);
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        position: relative;
+        &__close{
+            color: var(--ion-color-success);
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 30px;
+            ion-icon{
+                cursor: pointer;
+            }
+        }
+        &__title{
+            font-size:16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom:15px;
+            text-align: center;
+        }
+        &__file{
+            display: flex;
+            
+            align-items: center;
+            flex-direction: column;
+            img{
+                max-width: 420px;
+                max-height: 520px;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+
+<ion-content>
+  <div class="contentPage">
+    <div class="contentPage__title">
+      Historico de Domicilios
+    </div>
+    <div class="contentPage__content">
+      <div class="contentPage__content__table">
+        <app-data-table 
+          [columns]="columns"   
+          [data]="data"           
+          [options]= "true"
+          [optionsDelete]="false"
+          (editEvent)="gotoEdit($event)"
+          >
+      </app-data-table>
+      </div>
+    </div>
+  </div>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>

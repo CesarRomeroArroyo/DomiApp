@@ -1,0 +1,78 @@
+<ion-content>
+  <div class="contentPage">
+    <div class="contentPage__title">
+      <div class="contentPage__title__back" onclick="window.history.go(-1);">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        <div class="contentPage__title__back__text">Atras</div>
+      </div>
+      <div class="contentPage__title__text"></div>
+    </div>
+    <div class="contentPage__content">
+      <div class="contentPage__content__form">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item-divider color="success">
+                <ion-label>
+                  DATOS BASICOS
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Razon Social: </ion-label>
+                <ion-input [(ngModel)]="cliente.razon_social"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label>Tipo de Ide</ion-label>
+                <ion-select placeholder="Selecciona un Tipo" [(ngModel)]="cliente.tip_ide">
+                  <ion-select-option value="CC">Cedula</ion-select-option>
+                  <ion-select-option value="PA">Pasaporte</ion-select-option>
+                  <ion-select-option value="CE">Cedula Extranjeria</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Numero Ide</ion-label>
+                <ion-input [(ngModel)]="cliente.num_ide"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Telefono 1</ion-label>
+                <ion-input [(ngModel)]="cliente.tel_uno"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6" size-lg="6">
+              <ion-item>
+                <ion-label position="floating">Telefono 2</ion-label>
+                <ion-input [(ngModel)]="cliente.tel_dos"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Email: </ion-label>
+                <ion-input [(ngModel)]="cliente.mail"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    <app-direccion-clientes *ngIf="edit" [clienteId]="cliente.id"></app-direccion-clientes>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="confirmarGuardado()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

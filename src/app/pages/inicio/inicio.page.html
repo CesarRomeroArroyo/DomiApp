@@ -1,0 +1,189 @@
+<ion-content>
+  <div class="inicio">
+    <div class="inicio__bienvenido">
+      Hola, {{user?.Nombre}}, Bienvenido a DomiApp.
+    </div>
+    <div class="inicio__body">
+      <div class="inicio__body__domicilio">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item-divider color="success">
+                <ion-label>
+                  SOLICITAR UN NUEVO DOMICILIO
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="12" size-lg="8">
+             
+              <ion-row>
+                <ion-col size="12" size-md="12" size-lg="12" *ngIf="user?.permisos=='1'" >
+                  <ion-item>
+                    <ion-label>Indica el Emprendedor</ion-label>
+                    <ion-select placeholder="Indica el Emprendedor" (ionChange)="getClientesByEmprendedorSelector()" [(ngModel)]="emprendedor" interface="popover">
+                      <ion-select-option *ngFor="let cliente of emprendedores" value="{{cliente.iduser}}">{{cliente.Nombre}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12">
+                  <ion-item>
+                    <ion-label>Indica el Cliente</ion-label>
+                    <ion-select placeholder="Indica el Cliente" (ionChange)="getDireccionesClientes()" [(ngModel)]="cliente" interface="popover">
+                      <ion-select-option *ngFor="let cliente of clientes" value="{{cliente.id}}">{{cliente.razon_social}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12">
+                  <ion-item>
+                    <ion-label>Indica la direccion del Cliente</ion-label>
+                    <ion-select placeholder="Indica la direccion del Cliente" interface="popover" [(ngModel)]="direccion">
+                      <ion-select-option *ngFor="let dir of direcciones" value="{{dir.id}}">{{dir.direccion}} {{dir.barrio}} {{dir.ciudad}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12">
+                  <ion-item>
+                    <ion-label position="">Indica la Fecha del Domicilio</ion-label>
+                    <ion-input type="date" placeholder="dd-mm-YYYY" [(ngModel)]="domicilio.fecha"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12">
+                  <ion-item>
+                    <ion-label position="">Indica la Hora del Domicilio</ion-label>
+                    <ion-input type="time" placeholder="" [(ngModel)]="domicilio.hora"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12">
+                  <ion-item>
+                    
+                    <ion-textarea rows="5" [(ngModel)]="domicilio.descripcion" placeholder="Indica que vas a enviar"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+                
+              </ion-row>
+            </ion-col>
+            <ion-col size="12" size-md="12" size-lg="4">
+              <div class="invoice" *ngFor="let conf of valores">
+                <div class="invoice__data"> Total a Pagar:  <label>{{getTotalFactura(conf) | currency : 'USD' : 'symbol' : '1.0-0' }}</label> </div>
+                <div class="invoice__note">*El valor a pagar debe ser cancelado al domiciliario al momento de entregar los productos a ser enviados</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="12" size-lg="12">
+                  
+              <ion-button expand="block" color="success" size="large" (click)="prepararDomicilio()">Solicitar Domicilio</ion-button>
+              <!-- <ion-button expand="block" color="success" size="large" (click)="test()">Test</ion-button> -->
+            
+          </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <div class="inicio__body__financiero" *ngIf="user?.permisos=='1'" >
+        <ion-grid >
+          <ion-row >
+            <ion-col size="12" size-md="6" size-lg="6" >
+              <ion-item-divider color="success">
+                <ion-label>
+                  DOMICILIOS POR FACTURAR
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="6" class="card">
+                <div class="inicio__body__financiero__domi" *ngFor="let domi of aFacturar">
+                  <div class="inicio__body__financiero__domi__nombres">
+                    <div class="inicio__body__financiero__domi__nombres__emprende">
+                      {{domi.emprende_nombre}}
+                    </div>
+                    <div class="inicio__body__financiero__domi__nombres__cliente">
+                      {{domi.cliente_nombre}}
+                    </div>
+                  </div>
+                  <div class="inicio__body__financiero__domi__valores">
+                    <div class="inicio__body__financiero__domi__valores__domi">Domiciliario: {{domi.pago_domiciliario | currency : 'USD' : 'symbol' : '1.0-0'}}</div>
+                    <div class="inicio__body__financiero__domi__valores__emprende">Emprendedor: {{domi.pago_emprendedor | currency : 'USD' : 'symbol' : '1.0-0'}}</div>
+                    <div class="inicio__body__financiero__domi__valores__total">Total: {{getTotalFactura(domi) | currency : 'USD' : 'symbol' : '1.0-0' }}</div>
+                  </div>
+                </div>  
+                <div class="inicio__body__financiero__total">
+                  <div class="inicio__body__financiero__total__texto">TOTAL A FACTURAR:</div>
+                  <div class="inicio__body__financiero__total__valor" *ngIf="aFacturar.length > 0">{{totalGral | currency : 'USD' : 'symbol' : '1.0-0' }} </div>
+                </div>
+                
+                <ion-button color="success" expand="block" size="large" (click)="facturar()">
+                  <ion-icon name="arrow-redo-outline"></ion-icon> Facturar
+                </ion-button>
+            
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <div class="inicio__body__financiero" *ngIf="user?.permisos=='2'" >
+        <ion-grid >
+          <ion-row >
+            <ion-col size="12" size-md="6" size-lg="6" >
+              <ion-item-divider color="success">
+                <ion-label>
+                  FACTURAS PENDIENTES
+                </ion-label>
+              </ion-item-divider>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="12" size-lg="6" class="card">
+                <div class="inicio__body__financiero__domi" *ngFor="let domi of facturas">
+                  <div class="inicio__body__financiero__domi__nombres">
+                    <div class="inicio__body__financiero__domi__nombres__emprende">
+                      {{domi.cliente_nombre}}
+                    </div>
+                  </div>
+                  <div class="inicio__body__financiero__domi__valores">
+                    
+                    <div class="inicio__body__financiero__domi__valores__total">{{getTotalFactura(domi) | currency : 'USD' : 'symbol' : '1.0-0' }}</div>
+                  </div>
+                </div>  
+                <div class="inicio__body__financiero__total">
+                  <div class="inicio__body__financiero__total__texto">TOTAL A PAGAR:</div>
+                  <div class="inicio__body__financiero__total__valor" *ngIf="facturas.length > 0">{{totalGral | currency : 'USD' : 'symbol' : '1.0-0' }} </div>
+                </div>
+                
+                <ion-button color="success" expand="block" size="large" (click)="modal=true; selectedFile = null">
+                  <ion-icon name="arrow-redo-outline"></ion-icon> Pagar Factura
+                </ion-button>
+            
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal" *ngIf="modal">
+    <div class="modal__content">
+      <div class="modal__content__close" (click)="modal=false">
+        <ion-icon name="close-circle"></ion-icon>
+      </div>
+      <div class="modal__content__title">
+        <ion-item-divider color="success">
+          <ion-label>
+            AGREGUE UNA FOTO O IMAGEN DE EVIDENCIA DE PAGO
+          </ion-label>
+        </ion-item-divider>
+      </div>
+      <div class="modal__content__file">
+        <ion-input type="file" name="" (change)="cargarImagen($event)" ></ion-input>
+        <img src="{{selectedFile}}" >
+      </div>
+      <ion-button color="success" expand="block" size="large" (click)="pagarFacturar()" *ngIf="selectedFile">
+        <ion-icon name="arrow-redo-outline"></ion-icon> Enviar Evidencia de Pago
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+
