@@ -22,46 +22,49 @@
                 <ion-col size="12" size-md="12" size-lg="12" *ngIf="user?.permisos=='1'" >
                   <ion-item>
                     <ion-label>Indica el Emprendedor</ion-label>
-                    <ion-select placeholder="Indica el Emprendedor" (ionChange)="getClientesByEmprendedorSelector()" [(ngModel)]="emprendedor" interface="popover">
+                    <ion-select placeholder="Indica el Emprendedor" [(ngModel)]="emprendedor" interface="popover">
                       <ion-select-option *ngFor="let cliente of emprendedores" value="{{cliente.iduser}}">{{cliente.Nombre}}</ion-select-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
                 <ion-col size="12" size-md="12" size-lg="12">
                   <ion-item>
-                    <ion-label>Indica el Cliente</ion-label>
-                    <ion-select placeholder="Indica el Cliente" (ionChange)="getDireccionesClientes()" [(ngModel)]="cliente" interface="popover">
-                      <ion-select-option *ngFor="let cliente of clientes" value="{{cliente.id}}">{{cliente.razon_social}}</ion-select-option>
+                    <ion-label>Tipo de Domicilio</ion-label>
+                    <ion-select placeholder="Indica el Tipo" [(ngModel)]="domicileOption" interface="popover">
+                      <ion-select-option value=2>Entrega</ion-select-option>
+                      <ion-select-option value=1>Mandado</ion-select-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
-                <ion-col size="12" size-md="12" size-lg="12">
+                <div *ngIf="domicileOption > 0">
+                <ion-col size="12" size-md="12" size-lg="12" *ngIf="domicileOption == 2">
                   <ion-item>
-                    <ion-label>Indica la direccion del Cliente</ion-label>
-                    <ion-select placeholder="Indica la direccion del Cliente" interface="popover" [(ngModel)]="direccion">
-                      <ion-select-option *ngFor="let dir of direcciones" value="{{dir.id}}">{{dir.direccion}} {{dir.barrio}} {{dir.ciudad}}</ion-select-option>
-                    </ion-select>
+                    <ion-label>Nombre del Cliente</ion-label>
+                    <ion-input [(ngModel)]="cliente" interface="popover"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="12" *ngIf="domicileOption == 1">
+                  <ion-item>
+                    <ion-textarea rows="3" [(ngModel)]="direccion_compra" placeholder="Dirección de compra"></ion-textarea>
                   </ion-item>
                 </ion-col>
                 <ion-col size="12" size-md="12" size-lg="12">
                   <ion-item>
-                    <ion-label position="">Indica la Fecha del Domicilio</ion-label>
-                    <ion-input type="date" placeholder="dd-mm-YYYY" [(ngModel)]="domicilio.fecha"></ion-input>
+                    <ion-textarea rows="3" [(ngModel)]="direccion_entrega" placeholder="Direccion de entrega"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="12" size-lg="6">
+                  <ion-item>
+                    <ion-label>Teléfono</ion-label>
+                    <ion-input interface="popover" [(ngModel)]="telefono" type="number"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="12" size-md="12" size-lg="12">
                   <ion-item>
-                    <ion-label position="">Indica la Hora del Domicilio</ion-label>
-                    <ion-input type="time" placeholder="" [(ngModel)]="domicilio.hora"></ion-input>
+                    <ion-textarea rows="5" [(ngModel)]="domicilio.descripcion" placeholder="Observaciones"></ion-textarea>
                   </ion-item>
                 </ion-col>
-                <ion-col size="12" size-md="12" size-lg="12">
-                  <ion-item>
-                    
-                    <ion-textarea rows="5" [(ngModel)]="domicilio.descripcion" placeholder="Indica que vas a enviar"></ion-textarea>
-                  </ion-item>
-                </ion-col>
-                
+              </div>
               </ion-row>
             </ion-col>
             <ion-col size="12" size-md="12" size-lg="4">
@@ -73,10 +76,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12" size-md="12" size-lg="12">
-                  
               <ion-button expand="block" color="success" size="large" (click)="prepararDomicilio()">Solicitar Domicilio</ion-button>
-              <!-- <ion-button expand="block" color="success" size="large" (click)="test()">Test</ion-button> -->
-            
           </ion-col>
           </ion-row>
         </ion-grid>
@@ -118,7 +118,6 @@
                 <ion-button color="success" expand="block" size="large" (click)="facturar()">
                   <ion-icon name="arrow-redo-outline"></ion-icon> Facturar
                 </ion-button>
-            
             </ion-col>
           </ion-row>
         </ion-grid>
