@@ -75,7 +75,14 @@ export class UsuarioPage implements OnInit {
 
     if (this.user.permisos === '2'){
       if(this.emprendedor.password.trim() == this.newPasswordEmprendedor.trim()){
-        const usuario:any =  {iduser: this.user.iduser, pass:this.emprendedor.password};
+        const usuario:any =  {
+          iduser: this.user.iduser,
+          Nombre: this.emprendedor.nombre, 
+          pass:this.emprendedor.password,
+          user:this.emprendedor.usuario
+        };
+        this.emprendedor.direccion = this.emprendedor.direccion;
+        this.emprendedor.telefono = this.emprendedor.telefono;
         await this.proxyService.putMethod("update/emprendedores/", this.emprendedor);
         await this.proxyService.putMethod("update_usuario_sgi/", usuario);
         const toast = await this.toastController.create({
