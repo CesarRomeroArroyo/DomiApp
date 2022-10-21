@@ -30,6 +30,5 @@ export class DashboardPage implements OnInit {
   logout(){
     this.localStorage.clearToken();
     this.router.navigate(['login']);
-    document.location = "https://appdomi.amazing-wright.137-184-198-32.plesk.page/";
   }
 }
