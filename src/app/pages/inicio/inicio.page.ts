@@ -7,7 +7,6 @@ import { UsuarioModel } from 'src/app/core/models/usuarioModel';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { ProxyService } from 'src/app/core/services/proxy.service';
 import { environment } from './../../../environments/environment';
-import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -17,15 +16,17 @@ import { LoadingController } from '@ionic/angular';
 })
 export class InicioPage implements OnInit {
   dataEmprendedor: any;
+  domicileOption: number = 0;
   ObjIdunico: any;
   position: any;
   user: UsuarioModel;
   emprendedores: any;
   clientes: any;
-  direcciones: any;
   cliente: any;
   emprendedor: any;
-  direccion: any;
+  direccion_compra: string = '';
+  direccion_entrega: string = '';
+  telefono: any = '';
   valores: any;
   configuracion: any;
   domicilio: DomiciliosModel = new DomiciliosModel();
@@ -80,8 +81,6 @@ export class InicioPage implements OnInit {
     }
   }
 
-  
-
   async getLocation() {
     try{
       const { idunico, permisos} = this.localStorage.getItem("DOMIAPP_USER");
@@ -113,18 +112,8 @@ export class InicioPage implements OnInit {
     this.emprendedores = await this.proxyService.getMethod("listEmprendedores/sgi/usuario/");
   }
 
-  async getClientesByEmprendedorSelector(){
-    this.getInfoEmprendedoresSelector();
-    this.clientes = await this.proxyService.getMethod("getClientesByEmprendedor/"+this.emprendedor);
-
-  }
-
   async getClientesByEmprendedor(){
     this.clientes = await this.proxyService.getMethod("getClientesByEmprendedor/"+this.user.iduser);
-  }
-
-  async getDireccionesClientes(){
-    this.direcciones = await this.proxyService.getMethod("clientedireccion/"+this.cliente);
   }
 
   async getConfiguracion(){
@@ -138,36 +127,59 @@ export class InicioPage implements OnInit {
   }
 
   async prepararDomicilio(){    
-    if(this.cliente && this.direccion && this.domicilio.fecha != ''){
-      
-      this.domicilio.idemprededor = this.dataEmprendedor[0].id;
-      this.domicilio.tipo_emprende = this.dataEmprendedor[0].tipo;
-      
-      this.domicilio.idcliente = this.cliente;
-      this.domicilio.iddireccion = this.direccion;
-      this.domicilio.cliente = this.user.codigo;
-      this.domicilio.valor = this.total;
-      this.domicilio.estado = 1;
-      await this.proxyService.postMethod('save/domicilios/', this.domicilio);
-      this.ws.send(JSON.stringify({id: 'domicilioCreado'}));
-      this.domicilio = new DomiciliosModel();
-      this.direccion = null;
-      this.cliente = null;
-      const toast = await this.toastController.create({
-        message: 'Domicilio Creado Correctamente',
-        duration: 4000,
-        color: 'success'
-      });
-      toast.present();
-    } else {
-      const toast = await this.toastController.create({
-        message: 'Debe indicar el Cliente, la Direccion y la Fecha de Envio para solicitar el domicilio',
-        duration: 4000,
-        color: 'danger'
-      });
-      toast.present();
-    }
-    
+    if(this.domicileOption != 0) {
+      if((this.telefono != '') && (this.direccion_entrega != "")){
+        if (this.domicileOption == 1){
+          this.domicilio.nombre_cliente = this.user.Nombre; 
+          this.domicilio.direccion_compra = this.direccion_compra;
+        } else {
+          this.domicilio.nombre_cliente = this.cliente;
+          this.domicilio.direccion_compra = this.dataEmprendedor[0].direccion;
+        }
+        this.domicilio.tipo_compra = this.domicileOption;
+        const fecha = new Date();
+        const day:string = fecha.getDate().toString();
+        const pmonth = fecha.getMonth()+1;
+        const month = pmonth.toString();
+        const year:string = fecha.getFullYear().toString();
+        const fechaActual = year+"-"+month+"-"+day;
+        this.domicilio.fecha = fechaActual;
+        this.domicilio.hora = fecha.toLocaleTimeString();
+        this.domicilio.direccion_entrega = this.direccion_entrega;
+        this.domicilio.cliente = this.user.codigo;
+        this.domicilio.valor = this.total;
+        this.domicilio.telefono_cliente = this.telefono;
+        this.domicilio.estado = 1;
+        console.log(this.domicilio);
+        await this.proxyService.postMethod('save/domicilios/', this.domicilio);
+        this.ws.send(JSON.stringify({id: 'domicilioCreado'}));
+        this.domicilio = new DomiciliosModel();
+        this.telefono = null;
+        this.direccion_entrega = null;
+        this.direccion_compra = null;
+        this.cliente = null;
+        const toast = await this.toastController.create({
+          message: 'Domicilio Creado Correctamente',
+          duration: 4000,
+          color: 'success'
+        });
+        toast.present();
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Debe ingresar Direccion de Entrega y el Número de Teléfono para solicitar el domicilio',
+          duration: 4000,
+          color: 'danger'
+        });
+        toast.present();
+      }
+   } else {
+    const toast = await this.toastController.create({
+      message: 'Debe generar un nuevo domicilio',
+      duration: 4000,
+      color: 'danger'
+    });
+    toast.present();
+   }
   }
 
   async getAFacturar() {
@@ -239,7 +251,6 @@ export class InicioPage implements OnInit {
   subiendoArchivo(ev){
     let img:any = ev.target;
     if(img.files.length > 0){
-      
       let form = new FormData();
       form.append('file',img.files[0]);
       const id = 'images/123';
@@ -248,8 +259,6 @@ export class InicioPage implements OnInit {
 
     }
   }
-
-
 
   async cargarImagen(event){
     const image =<File>event.target.files[0];
@@ -270,8 +279,5 @@ export class InicioPage implements OnInit {
       toast.present();
     }
   }
-
   test(){this.ws.send(JSON.stringify({id: 'domicilioCreado'}));}
-
-
 }

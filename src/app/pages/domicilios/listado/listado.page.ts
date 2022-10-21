@@ -20,7 +20,6 @@ export class ListadoPage implements OnInit {
   constructor(
     private router: Router,
     private proxyService: ProxyService,
-    private toastController: ToastController,
     private contextService: ContextService,
     private localStorage: LocalStorageService
     ) { }
@@ -33,12 +32,12 @@ export class ListadoPage implements OnInit {
     this.user = this.localStorage.getItem('DOMIAPP_USER');
     console.log(this.user );
     this.columns = [
-      { title: 'Fecha', name: 'domi_fecha' },
-      { title: 'Emprendedor', name: 'emprende_nombre' },
-      { title: 'Cliente', name: 'cliente_nombre' },
-      { title: 'Dirección Cliente', name: 'cliente_direccion' },
-      { title: 'Domiciiliario', name: 'domiciliario_nombre' },
-      { title: 'Estado', name: 'domi_estado_texto' },
+      { title: 'Fecha', name: 'fecha' },
+      { title: 'Cliente', name: 'nombre_cliente' },
+      { title: 'Direccion compra', name: 'direccion_compra' },
+      { title: 'Dirección entrega', name: 'direccion_entrega' },
+      { title: 'Domiciliario', name: 'iddomiciliario' },
+      { title: 'Estado', name: 'estado' },
     ];
     this.getDomicilios();
     this.iniciarWS();
@@ -52,10 +51,11 @@ export class ListadoPage implements OnInit {
     }
     if (this.user.permisos === '2') {
       
-      const dataEmprendedor = await this.proxyService.postMethod("/getByIdUnico/emprendedores/", {idunico:this.user.idunico});
-      const domiEmprende = await this.proxyService.postMethod('domicilesEmprendedor/', {cliente: this.user.codigo, emprende: dataEmprendedor[0].id});        
-      console.log(domiEmprende);
-      this.data = domiEmprende;      
+      const dataEmprendedor = await this.proxyService.getMethod('list/domicilios/');
+      this.data = dataEmprendedor;
+      // const domiEmprende = await this.proxyService.postMethod('domicilesEmprendedor/', {cliente: this.user.codigo, emprende: dataEmprendedor[0].id});        
+      // console.log(domiEmprende);
+      // this.data = domiEmprende;      
     }
   }
 
