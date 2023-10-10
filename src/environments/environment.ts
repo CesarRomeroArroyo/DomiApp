@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://domiapp.amazing-wright.137-184-198-32.plesk.page/public/',
+  api_url: 'https://codigofuentecorp.eastus.cloudapp.azure.com/DomiappApis/public/',
   sockets_url: 'wss://king-prawn-app-5qx6e.ondigitalocean.app/'
 };
 
