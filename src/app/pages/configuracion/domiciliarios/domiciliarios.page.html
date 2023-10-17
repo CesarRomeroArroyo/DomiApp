@@ -1,24 +1,15 @@
 <ion-content>
-<div class="contentPage">
-  <div class="contentPage__title">
-    Domiciliarios
-  </div>
-  <div class="contentPage__content">
-    <div class="contentPage__content__table">
-      <app-data-table 
-        [columns]="columns" 
-        [data]="data"         
-        [options]= "true"
-        (editEvent)="gotoEdit($event)"
-        (deleteEvent)="delete($event)"
-      >
+  <app-content-area title="domiciliarios">
+    <app-data-table 
+      [columns]="columns" 
+      [data]="data" 
+      [options]="true" 
+      (editEvent)="gotoEdit($event)"
+          (deleteEvent)="delete($event)">
     </app-data-table>
-    </div>
-  </div>
-</div>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" >
-  <ion-fab-button color="success" (click)="gotToNew()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+  </app-content-area>
+
+  <app-fab-button (click)="gotToNew()">
+  </app-fab-button>
+
 </ion-content>

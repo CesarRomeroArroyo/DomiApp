@@ -1,18 +1,92 @@
 ion-menu ion-content {
   --ion-background-color: white !important;
-  cursor: pointer;
+  display: flex;
+  cursor: pointer;  
+  .logo_navbar_img {
+    padding-top: 15%;
+    padding-bottom: 10%;
+    width: 90%;
+    max-width: 100%;    
+    display: block; /* Para eliminar espacios en blanco no deseados */
+    margin: 0 auto; /* Centra horizontalmente la imagen */
+  }
+  
 }
 
-.split-pane-visible > .split-pane-side {
-  min-width: 250px !important;
-  max-width: 250px !important;
+.split-pane-visible>.split-pane-side {
+  min-width: 20% !important;
+  max-width: 20% !important;
 }
 
-.icon-user{
-  padding-right: 15px;
+
+.list-menu{
+  ion-item {
+    border-radius: 10px;
+    margin: 20px;  
+    .custom-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;             
+    }  
+    
+
+    /* EL HOVER
+    &:hover {
+      --ion-background-color: rgba(241, 244, 255, 1) !important;      
+    }*/
+
+    .icon {
+      margin-right: 10px;
+      margin-left: 10px;
+    }  
+    .label {
+      font-family: 'Poppins', sans-serif;
+      margin-left: 10px; 
+    }  
+  }
 }
 
-.icon-size{
-  font-size: 1.9rem;
-  padding-right: 9px;
+@keyframes fadeDown {
+  from {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
+
+.selected {
+  --ion-background-color: rgba(2, 219, 53, 1) !important;
+  animation: fadeDown 0.4s ease;
+  ion-label {
+    color: var(--ion-color-secondary) !important;
+  }
+  ion-icon {
+    color: var(--ion-color-secondary) !important;    
+  }  
+}
+
+.exit{
+  ion-item {    
+    margin-left: 20px;
+    margin-top: 40%;    
+    .icon {
+      margin-right: 10px;
+      margin-left: 10px;
+    }  
+    .label {
+      font-family: 'Poppins', sans-serif;
+      margin-left: 10px; 
+    }    
+  }
+}
+
+
+
+
+
+
+

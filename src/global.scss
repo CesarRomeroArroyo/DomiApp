@@ -24,3 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: 'poppins-medium'; // Nombre de la fuente
+    src: url('../src/assets/fonts/Poppins-Medium.ttf') format('woff'); // Ruta a tu archivo de fuente
+}
+
+@font-face {
+    font-family: 'poppins-bold'; // Nombre de la fuente
+    src: url('../src/assets/fonts/Poppins-Bold.ttf') format('woff'); // Ruta a tu archivo de fuente
+}

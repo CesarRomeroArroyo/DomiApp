@@ -1,4 +1,117 @@
 <ion-content>
+  
+  <app-content-area title="">
+    <app-app-title titles="Información de la empresa"></app-app-title>
+
+    <div class="name_id">
+      <div class="name">
+      <app-icon-bar         
+        label="Nombre"  
+        [model]="emprendedor.nombre"
+        placeholder="Ingresa nombre"                        
+        type="text"        
+        iconName="storefront-outline">          
+      </app-icon-bar> 
+    </div>
+
+    <div class="id">    
+      <app-icon-bar 
+        label="NIT"           
+        placeholder="NIT"                        
+        type="text"
+        iconName="apps-outline">          
+      </app-icon-bar>  
+      </div>
+    </div>
+
+    <div class="contact">
+      <app-icon-bar 
+        label="Número de teléfono 1"            
+        placeholder="Ingresa número de teléfono"                        
+        type="text"
+        iconName="call">          
+      </app-icon-bar>  
+
+      <app-icon-bar 
+        label="Número de teléfono 2"        
+        placeholder="Ingresa otro número de teléfono"                        
+        type="text"
+        iconName="call">          
+      </app-icon-bar>  
+
+      <app-icon-bar 
+        label="Dirección"            
+        placeholder="Ingresa dirección..."
+        type="text"
+        iconName="location-outline">          
+      </app-icon-bar>
+    </div>    
+
+  <app-lines></app-lines>
+
+  <app-app-title titles="Tipo de empresa"></app-app-title>
+      <app-icon-bar 
+        label="Tipo"                     
+        placeholder="Ingresa dirección..."
+        type="text"
+        iconName="business-outline">          
+      </app-icon-bar>  
+
+  <app-lines></app-lines>
+
+  <app-app-title titles="Datos de usuario"></app-app-title>    
+
+      <div class="user">
+        <app-icon-bar 
+          label="Usuario"                
+          placeholder="Ingresa dirección..."
+          type="text"
+          iconName="person">          
+        </app-icon-bar>  
+
+        <app-icon-bar 
+          label="Contraseña"                      
+          placeholder="Ingresa dirección..."
+          type="password"
+          iconName="key">          
+        </app-icon-bar>  
+
+        <ion-button 
+          size="large" 
+          expand="block"
+          disabled
+          >Restablecer
+        </ion-button>
+
+      </div>     
+
+
+      <div class="buttons">
+        <ion-button 
+          size="large" 
+          (click)="confirmarGuardado()"
+          expand="block"
+          >Guardar
+        </ion-button>
+        <ion-button 
+          onclick="window.history.go(-1);"
+          size="large" 
+          expand="block"
+          color="danger"
+          >Cancelar
+        </ion-button>
+      </div>
+  </app-content-area>
+
+  
+  <!-- 
+  <app-fab-button>
+  </app-fab-button>
+  -->
+    
+
+<!-- 
+
   <div class="contentPage">
     <div class="contentPage__title">
       <div class="contentPage__title__back" onclick="window.history.go(-1);">
@@ -14,7 +127,7 @@
             <ion-col size="12">
               <ion-item-divider color="success">
                 <ion-label>
-                  DATOS BASICOS
+                  DATOS EMPRESA
                 </ion-label>
               </ion-item-divider>
             </ion-col>
@@ -99,9 +212,13 @@
       </div>
     </div>
   </div>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="success" (click)="confirmarGuardado()">
       <ion-icon name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  -->  
+  
+
 </ion-content>

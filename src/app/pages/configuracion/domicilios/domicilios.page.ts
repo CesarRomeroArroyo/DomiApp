@@ -11,7 +11,7 @@ import { ProxyService } from 'src/app/core/services/proxy.service';
   styleUrls: ['./domicilios.page.scss'],
 })
 export class DomiciliosPage implements OnInit {
-   public data: any;
+  public data: any;
   public columns: Array<any> = [];
   
   showModal = false;

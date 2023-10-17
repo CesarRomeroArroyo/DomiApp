@@ -94,12 +94,15 @@ export class InicioPage implements OnInit {
           this.proxyService.putMethod("update/emprendedores/", this.dataEmprendedor[0]);
         }
     } catch{
+      /*
       const toast = await this.toastController.create({
         message: 'Por favor dale permisos de ubicacion a la Aplicacion',
         duration: 4000,
         color: 'danger'
-      });
+      });      
+
       toast.present();
+      */
       this.getLocation();
     }
   }
