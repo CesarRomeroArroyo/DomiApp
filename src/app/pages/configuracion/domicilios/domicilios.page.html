@@ -1,8 +1,6 @@
 <ion-content>
   <div class="contentPage">
-    <div class="contentPage__title">
-     Domicilios
-    </div>
+    <ion-title>Domicilios</ion-title>
     <div class="contentPage__content">
       <div class="contentPage__content__table">
         <app-data-table 
@@ -16,9 +14,8 @@
       </div>
     </div>
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
-    <ion-fab-button color="success" (click)="gotToNew()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  </ion-content>
+
+  <app-fab-button (click)="gotToNew()">
+  </app-fab-button>
+  
+</ion-content>

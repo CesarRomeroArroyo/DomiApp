@@ -8,7 +8,58 @@ import { LocalStorageService } from '../core/services/local-storage.service';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  public typeUser:any;  
+  public typeUser: any;
+  selectedItemId: string | null = null; // Variable para rastrear el elemento seleccionado
+
+  items = [
+    {
+      icon: 'home-sharp',
+      text: 'inicio',
+      selected: true
+    },
+    {
+      icon: 'bicycle',
+      text: 'domiciliarios',
+      selected: false
+    },
+    {
+      icon: 'bag-check-outline',
+      text: 'emprendedores',
+      selected: false
+    },
+    {
+      icon: 'business-outline',
+      text: 'domicilios',
+      selected: false
+    },
+    {
+      icon: 'cash-outline',
+      text: 'finanzas',
+      selected: false
+    },
+    {
+      icon: 'map-outline',
+      text: 'mapas',
+      selected: false
+    },
+    {
+      icon: 'settings-outline',
+      text: 'ajustes',
+      selected: false
+    },
+  ];
+  
+  navigateAndSelect(item) {
+    this.items.forEach((i) => {
+      i.selected = false;
+    });
+    item.selected = true;
+
+    // Redirección a la ruta basada en item.text
+    this.router.navigate(['dashboard', item.text]);
+  }
+  
+
 
   constructor(
     private router: Router,
@@ -23,11 +74,11 @@ export class DashboardPage implements OnInit {
     this.typeUser = this.localStorage.getItem('DOMIAPP_USER');
   }
 
-  gotTo(ruta:any){
+  gotTo(ruta: any) {
     this.router.navigate(ruta)
   }
 
-  logout(){
+  logout() {
     this.localStorage.clearToken();
     this.router.navigate(['login']);
     document.location = "https://appdomi.amazing-wright.137-184-198-32.plesk.page/";

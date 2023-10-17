@@ -1,4 +1,5 @@
 <ion-header>
+  <!-- 
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="true"></ion-menu-button>
@@ -9,89 +10,124 @@
         <ion-icon name="person-circle-outline" color="success"></ion-icon>
     </ion-button>
   </ion-toolbar>
+  -->
 </ion-header>
+
 <ion-content>
   <ion-split-pane contentId="containerId" when="sm">
     <ion-menu contentId="containerId" menuId="menu-content" side="start" type="overlay">
+
       <ion-content>
+        <div class="logo_navbar_img">
+          <img src="./../../assets/images/Logo.png" alt="">
+        </div>
+
+        <div class="menu-container">
+          <div class="list-menu">
+            <ion-list lines="none">
+              <ion-item no-lines *ngFor="let item of items" (click)="navigateAndSelect(item)"
+                [ngClass]="{'custom-item': true, 'selected': item.selected}">
+                <ion-icon [name]="item.icon" [color]="item.selected ? 'success' : 'medium'" class="icon"></ion-icon>
+                <ion-label color="medium" class="label">{{ item.text }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <div class="exit">
+            <ion-list lines="none">
+              <ion-item (click)="logout()" no-lines>
+                <ion-icon name="exit" color="medium"></ion-icon>
+                <ion-label color="medium" class="label">Salir</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+
+
+        <!-- 
+ 
+        <ion-content>
         <ion-list lines="none">
           <ion-menu-toggle autoHide="false">
-              <ion-item no-lines (click)="gotTo(['dashboard','inicio'])" >
-                <ion-icon name="home" color="success"></ion-icon>
-                <ion-label color="success">Inicio</ion-label>
-              </ion-item>
-              <ion-accordion-group *ngIf="typeUser.permisos==1" [value]="['tiquetes']">
-                <ion-accordion value="tiquetes">
-                  <ion-item slot="header">
-                    <ion-icon name="cog" color="success"></ion-icon> 
-                    <ion-label color="success">Configuracion</ion-label>
+            <ion-item no-lines (click)="gotTo(['dashboard','inicio'])">
+              <ion-icon name="home" color="success"></ion-icon>
+              <ion-label color="success">Inicio</ion-label>
+            </ion-item>
+            <ion-accordion-group *ngIf="typeUser.permisos==1" [value]="['tiquetes']">
+              <ion-accordion value="tiquetes">
+                <ion-item slot="header">
+                  <ion-icon name="cog" color="success"></ion-icon>
+                  <ion-label color="success">Configuracion</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-item (click)="gotTo(['dashboard','domiciliarios'])">
+                    <ion-label>Domiciliarios</ion-label>
                   </ion-item>
-                  <ion-list slot="content">
-                    <ion-item (click)="gotTo(['dashboard','domiciliarios'])" >
-                      <ion-label>Domiciliarios</ion-label>
-                    </ion-item>
-                    <ion-item (click)="gotTo(['dashboard','emprendedores'])">
-                      <ion-label>Emprendedores</ion-label>
-                    </ion-item>                   
-                    <ion-item (click)="gotTo(['dashboard','tipo-emprededor'])">
-                      <ion-label>Tipos de Emprendedor</ion-label>
-                    </ion-item>                   
-                    <ion-item (click)="gotTo(['dashboard','generales'])">
-                      <ion-label>Generales</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-accordion>
-              </ion-accordion-group>
-              <ion-accordion-group *ngIf="typeUser.permisos==2"  [value]="['tiquetes']">
-                <ion-accordion value="tiquetes">
-                  <ion-item slot="header">
-                    <ion-icon name="cog" color="success"></ion-icon>
-                    <ion-label color="success">Configuracion</ion-label>
+                  <ion-item (click)="gotTo(['dashboard','emprendedores'])">
+                    <ion-label>Emprendedores</ion-label>
                   </ion-item>
-                  <ion-list slot="content">
-                    <ion-item (click)="gotTo(['dashboard','emprendedores', 'clientes'])" >
-                      <ion-label>Clientes</ion-label>
-                    </ion-item>
-                    <ion-item (click)="gotTo(['dashboard','listado'])">
-                      <ion-label>Mis Domicilios</ion-label>
-                    </ion-item>
-                   <!--  <ion-item (click)="gotTo(['dashboard','productos'])">
+                  <ion-item (click)="gotTo(['dashboard','tipo-emprededor'])">
+                    <ion-label>Tipos de Emprendedor</ion-label>
+                  </ion-item>
+                  <ion-item (click)="gotTo(['dashboard','generales'])">
+                    <ion-label>Generales</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+            <ion-accordion-group *ngIf="typeUser.permisos==2" [value]="['tiquetes']">
+              <ion-accordion value="tiquetes">
+                <ion-item slot="header">
+                  <ion-icon name="cog" color="success"></ion-icon>
+                  <ion-label color="success">Configuracion</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-item (click)="gotTo(['dashboard','emprendedores', 'clientes'])">
+                    <ion-label>Clientes</ion-label>
+                  </ion-item>
+                  <ion-item (click)="gotTo(['dashboard','listado'])">
+                    <ion-label>Mis Domicilios</ion-label>
+                  </ion-item>
+                  <ion-item (click)="gotTo(['dashboard','productos'])">
                       <ion-label>Productos</ion-label>
                     </ion-item>
                     <ion-item (click)="gotTo(['dashboard','categorias'])">
                       <ion-label>Categorias</ion-label>
-                    </ion-item> -->
-                    <ion-item (click)="gotTo(['dashboard','generales'])" *ngIf="typeUser.permisos==1">
-                      <ion-label>Generales</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-accordion>
-              </ion-accordion-group>
-              <ion-accordion-group *ngIf="typeUser.permisos==1"  [value]="['gestion']">
-                <ion-accordion value="gestion">
-                  <ion-item slot="header">
-                    <ion-icon name="cart" color="success"></ion-icon>
-                    <ion-label color="success">Domicilios</ion-label>
+                    </ion-item> 
+                  <ion-item (click)="gotTo(['dashboard','generales'])" *ngIf="typeUser.permisos==1">
+                    <ion-label>Generales</ion-label>
                   </ion-item>
-                  <ion-list slot="content">
-                    <ion-item (click)="gotTo(['dashboard','listado'])">
-                      <ion-label>Pendientes</ion-label>
-                    </ion-item>
-                    <ion-item (click)="gotTo(['dashboard','historico'])">
-                      <ion-label>Procesados</ion-label>
-                    </ion-item>                    
-                    <ion-item  (click)="gotTo(['dashboard','mapas'])">
-                      <ion-label>Mapa</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-accordion>
-              </ion-accordion-group>
-              <ion-item (click)="logout()" no-lines >
-                <ion-icon name="exit" color="success"></ion-icon>
-                <ion-label color="success">Salir</ion-label>
-              </ion-item>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+            <ion-accordion-group *ngIf="typeUser.permisos==1" [value]="['gestion']">
+              <ion-accordion value="gestion">
+                <ion-item slot="header">
+                  <ion-icon name="cart" color="success"></ion-icon>
+                  <ion-label color="success">Domicilios</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-item (click)="gotTo(['dashboard','listado'])">
+                    <ion-label>Pendientes</ion-label>
+                  </ion-item>
+                  <ion-item (click)="gotTo(['dashboard','historico'])">
+                    <ion-label>Procesados</ion-label>
+                  </ion-item>
+                  <ion-item (click)="gotTo(['dashboard','mapas'])">
+                    <ion-label>Mapa</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+            <ion-item (click)="logout()" no-lines>
+              <ion-icon name="exit" color="success"></ion-icon>
+              <ion-label color="success">Salir</ion-label>
+            </ion-item>
           </ion-menu-toggle>
         </ion-list>
+
+        -->
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="containerId"></ion-router-outlet>

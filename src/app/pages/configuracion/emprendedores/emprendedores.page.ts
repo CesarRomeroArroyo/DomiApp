@@ -36,15 +36,16 @@ export class EmprendedoresPage implements OnInit {
     this.columns = [
       { title: 'Nombre', name: 'nombre' },
       { title: 'Identificacion', name: 'num_ide' },
-      { title: 'Telefono', name: 'telefono' },
-      { title: 'Email', name: 'email' },
+      { title: 'Teléfono', name: 'telefono' },
+      { title: 'Dirección', name: 'direccion' },
     ];
     this.buscarEmprendedores();
     this.contextService.data = new EmprendedoresModel();
   }
 
-  async buscarEmprendedores() {
+  async buscarEmprendedores() {    
     this.data = await this.proxyService.getMethod("list/emprendedores/");
+    console.log(this.data);
   }
 
   gotToNew() {

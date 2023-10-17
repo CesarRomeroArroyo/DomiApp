@@ -1,0 +1,45 @@
+.contentPage {   
+    /*margin-bottom: 20%;   */
+    ion-title {
+        margin-top: 50px;
+        font-family: 'Poppins-bold', sans-serif;
+        color: var(--ion-color-dark);
+        margin-bottom: 30px;
+        width: 95%;
+        margin-left: 2%;
+    }
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgba(92, 92, 92, 1); 
+        font-family: 'Poppins-bold', sans-serif;        
+
+        .line{
+            border: solid 1px rgba(202, 202, 202, 1); 
+            margin-top: 2%;
+            margin-bottom: 2%;
+            margin-left: 3%;
+            margin-right: 3%;
+            align-items: center;
+        }        
+            
+        &__table {
+            background-color: white;
+            width: 95%;
+            height: 100%;
+            border-radius: 30px;
+            box-shadow: 4px 4px 4px 2px rgba(225, 229, 245, 0.5);       
+            
+        }
+        
+    }
+}
+
+.title{
+    ion-title{
+        color: rgba(92, 92, 92, 1); 
+        margin-top: 2%;
+    }            
+}
+

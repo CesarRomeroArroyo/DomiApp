@@ -1,13 +1,73 @@
-.contentPage {
-    &__content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &__form {
-            background-color: white;
-            width: 100%;
-            border-radius: 5px;
-            padding: 15px;
-        }
+.name_id{
+    display: flex;  
+    align-items: center;    
+    justify-content: space-between;
+    margin-left: 1%;
+    margin-right: 2%;   
+    .name{
+        
+        width: 69%; 
+        color: white;        
+    }
+    .id{
+        width: 33%; 
+        color: white;        
     }
 }
+
+.contact{
+    display: flex;  
+    align-items: center;    
+    justify-content: space-between;
+    margin-left: 2%;
+    margin-right: 2%;
+    app-icon-bar{
+        width: 33%; 
+        color: white;
+    }
+}
+
+.user{    
+    display: flex;  
+    align-items: center;    
+    justify-content: space-between;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+
+    app-icon-bar{
+        width: 40%; 
+        color: white;
+    }
+
+    ion-button{
+        margin-top: 1.5%;
+        width: 15%;
+        margin-right: 1.5%;
+        --border-radius: 8px;
+        font-family: 'Poppins-medium', sans-serif;
+        text-transform: capitalize;
+        font-size: 16px;
+        height: 48px;
+    }
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    margin-bottom: 4%;
+    gap: 16px;
+    ion-button{
+        height: 48px;
+        margin-top: 1.5%;
+        width: 15%;
+        margin-right: 1.5%;
+        --border-radius: 8px;
+        font-family: 'Poppins-medium', sans-serif;
+        text-transform: capitalize;
+        font-size: 16px;
+    }
+}
+
+
